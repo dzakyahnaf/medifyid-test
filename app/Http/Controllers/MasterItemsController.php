@@ -96,12 +96,12 @@ class MasterItemsController extends Controller
     public function delete($id)
     {
         $item = MasterItem::find($id);
-        
+
         // Delete foto if exists
         if ($item->foto && file_exists(public_path('uploads/master_items/' . $item->foto))) {
             unlink(public_path('uploads/master_items/' . $item->foto));
         }
-        
+
         $item->delete();
         return redirect('master-items');
     }
