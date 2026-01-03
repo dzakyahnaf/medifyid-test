@@ -153,4 +153,56 @@ class MasterItemsController extends Controller
         $random = rand(0,4);
         return $array[$random];
     }
+
+    public function exportCsv()
+    {
+        $items = MasterItem::with('kategoriItems')->orderBy('id')->get();
+
+        $filename = 'master_items_' . now()->format('YmdHis') . '.csv';
+
+        $headers = [
+            'Content-Type' => 'text/csv; charset=UTF-8',
+            'Content-Disposition' => 'attachment; filename="' . $filename . '"',
+        ];
+
+        $callback = function() use ($items) {
+            $file = fopen('php://output', 'w');
+
+            // Set BOM untuk UTF-8 agar karakter Indonesia ditampilkan dengan benar di Excel
+            fprintf($file, chr(0xEF).chr(0xBB).chr(0xBF));
+
+            // Tambahkan separator hint agar Excel tahu menggunakan semicolon
+            fwrite($file, "sep=;\n");
+
+            // Header CSV dengan semicolon sebagai delimiter
+            fputcsv($file, ['No', 'Nama Kategori', 'Nama Item', 'Supplier', 'Harga', 'Laba (%)', 'Harga Jual'], ';');
+
+            // Data rows
+            $no = 1;
+            foreach ($items as $item) {
+                // Ambil semua nama kategori, dipisahkan dengan koma
+                $kategori_names = $item->kategoriItems->pluck('nama')->implode(', ');
+                if (empty($kategori_names)) {
+                    $kategori_names = '-';
+                }
+
+                // Hitung harga jual
+                $harga_jual = $item->harga_beli + ($item->harga_beli * $item->laba / 100);
+
+                fputcsv($file, [
+                    $no++,
+                    $kategori_names,
+                    $item->nama,
+                    $item->supplier,
+                    $item->harga_beli,
+                    $item->laba,
+                    round($harga_jual)
+                ], ';');
+            }
+
+            fclose($file);
+        };
+
+        return response()->stream($callback, 200, $headers);
+    }
 }
