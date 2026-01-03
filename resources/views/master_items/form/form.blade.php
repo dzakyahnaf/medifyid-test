@@ -60,6 +60,27 @@
         <small class="form-text text-muted">Format: JPG, JPEG, PNG, GIF. Max: 2MB</small>
     </div>
 
+    <div class="form-group">
+        <label>Kategori</label>
+        <div class="border p-2" style="max-height: 200px; overflow-y: auto;">
+            @if(count($kategori_items) > 0)
+                @foreach($kategori_items as $kategori)
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="kategori_items[]"
+                               value="{{$kategori->id}}" id="kategori_{{$kategori->id}}"
+                               @if($method == 'edit' && $item->kategoriItems->contains($kategori->id)) checked @endif>
+                        <label class="form-check-label" for="kategori_{{$kategori->id}}">
+                            {{$kategori->kode}} - {{$kategori->nama}}
+                        </label>
+                    </div>
+                @endforeach
+            @else
+                <p class="text-muted small mb-0">Belum ada kategori. <a href="{{url('kategori-items/form/new')}}" target="_blank">Buat kategori baru</a></p>
+            @endif
+        </div>
+        <small class="form-text text-muted">Pilih satu atau lebih kategori untuk item ini</small>
+    </div>
+
     <button class="btn btn-primary mt-3">Submit</button>
 
 </form>

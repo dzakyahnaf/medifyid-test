@@ -52,6 +52,7 @@ class MasterItemsController extends Controller
         }
         $data['item'] = $item;
         $data['method'] = $method;
+        $data['kategori_items'] = \App\Models\KategoriItem::all();
         return view('master_items.form.index', $data);
     }
 
@@ -98,6 +99,13 @@ class MasterItemsController extends Controller
         $data_item->supplier = $request->supplier;
         $data_item->jenis = $request->jenis;
         $data_item->save();
+
+        // Sync kategori items
+        if ($request->has('kategori_items')) {
+            $data_item->kategoriItems()->sync($request->kategori_items);
+        } else {
+            $data_item->kategoriItems()->sync([]);
+        }
 
         return redirect('master-items');
     }

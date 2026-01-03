@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class MasterItem extends Model
+class KategoriItem extends Model
 {
     use HasFactory;
     use SoftDeletes;
@@ -14,15 +14,10 @@ class MasterItem extends Model
     protected $fillable = [
         'kode',
         'nama',
-        'harga_beli',
-        'laba',
-        'supplier',
-        'jenis',
-        'foto',
     ];
 
-    public function kategoriItems()
+    public function masterItems()
     {
-        return $this->belongsToMany(KategoriItem::class);
+        return $this->belongsToMany(MasterItem::class);
     }
 }
