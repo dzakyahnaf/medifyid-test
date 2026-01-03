@@ -21,7 +21,7 @@
     })
 
     function getData(){
-        
+
         $('#loading-filter').show();
         var dataTableObj = $('#table').DataTable();
         var filter_kode = $('#filter-kode').val()
@@ -45,7 +45,7 @@
                     harga_jual = Math.round(harga_jual)
                     var kode = item.kode;
 
-                    var html = `<a href="{{url('master-items/view/')}}/` + kode + `" class="btn btn-primary">View</a>`
+                    var html = `<a href="{{url('master-items/view/')}}/` + kode + `" class="btn btn-primary btn-sm text-nowrap"><i class="bi bi-eye"></i> View</a>`
 
                     $.each(item, function(obj_name, obj_value) {
                         if (obj_name == 'laba') return false;

@@ -14,6 +14,8 @@
             </div>
         </div>
     </div>
-    <button class="btn btn-primary mt-1 btn-get-data">Filter</button>
+    <button class="btn btn-primary mt-1 btn-get-data">
+        <i class="bi bi-funnel"></i> Filter
+    </button>
     <span id="loading-filter" style="display: none;">Loading...</span>
 </div>

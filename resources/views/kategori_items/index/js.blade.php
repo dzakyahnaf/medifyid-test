@@ -36,7 +36,7 @@
                     array_temp = [];
                     var kode = item.kode;
 
-                    var html = `<a href="{{url('kategori-items/view/')}}/` + kode + `" class="btn btn-primary btn-md">View</a>`
+                    var html = `<a href="{{url('kategori-items/view/')}}/` + kode + `" class="btn btn-primary btn-sm text-nowrap"><i class="bi bi-eye"></i> View</a>`
 
                     array_temp.push(item.kode)
                     array_temp.push(item.nama)

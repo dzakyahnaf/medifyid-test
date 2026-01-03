@@ -5,7 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="form-group mb-2">
-                <a href="{{url('master-items/form/new')}}" class="btn btn-secondary">+ Master Items Baru</a>
+                <a href="{{url('master-items/form/new')}}" class="btn btn-secondary">
+                    <i class="bi bi-plus-circle"></i> Master Items Baru
+                </a>
                 <a href="{{url('master-items/export-csv')}}" class="btn btn-success">
                     <i class="bi bi-file-earmark-spreadsheet"></i> Download CSV/Excel
                 </a>

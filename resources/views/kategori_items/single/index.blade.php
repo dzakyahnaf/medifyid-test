@@ -5,7 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-md-10">
             <div class="form-group mb-2">
-                <a href="{{url('kategori-items')}}" class="btn btn-secondary">Kembali ke Daftar Kategori</a>
+                <a href="{{url('kategori-items')}}" class="btn btn-secondary">
+                    <i class="bi bi-arrow-left"></i> Kembali ke Daftar Kategori
+                </a>
             </div>
             <div class="card">
                 <div class="card-header">Detail Kategori</div>
@@ -23,8 +25,12 @@
                             <td>{{$data->nama}}</td>
                         </tr>
                     </table>
-                    <a class="btn btn-info" href="{{url('kategori-items/form/edit')}}/{{$data->id}}">Edit</a>
-                    <a class="btn btn-danger" href="{{url('kategori-items/delete')}}/{{$data->id}}" onclick="return confirm('Yakin ingin menghapus kategori ini?');">Delete</a>
+                    <a class="btn btn-info" href="{{url('kategori-items/form/edit')}}/{{$data->id}}">
+                        <i class="bi bi-pencil-square"></i> Edit
+                    </a>
+                    <a class="btn btn-danger" href="{{url('kategori-items/delete')}}/{{$data->id}}" onclick="return confirm('Yakin ingin menghapus kategori ini?');">
+                        <i class="bi bi-trash"></i> Delete
+                    </a>
                     <a class="btn btn-success" href="{{url('kategori-items/download-pdf')}}/{{$data->kode}}">
                         <i class="bi bi-file-pdf"></i> Download PDF
                     </a>
@@ -51,7 +57,9 @@
                                     <td>Rp {{ number_format($item->harga_beli, 0, ',', '.') }}</td>
                                     <td>{{$item->supplier}}</td>
                                     <td>
-                                        <a href="{{url('master-items/view')}}/{{$item->kode}}" class="btn btn-md btn-primary">View</a>
+                                        <a href="{{url('master-items/view')}}/{{$item->kode}}" class="btn btn-sm btn-primary">
+                                            <i class="bi bi-eye"></i> View
+                                        </a>
                                     </td>
                                 </tr>
                                 @endforeach

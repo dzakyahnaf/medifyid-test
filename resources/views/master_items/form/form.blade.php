@@ -81,6 +81,8 @@
         <small class="form-text text-muted">Pilih satu atau lebih kategori untuk item ini</small>
     </div>
 
-    <button class="btn btn-primary mt-3">Submit</button>
+    <button class="btn btn-primary mt-3">
+        <i class="bi bi-check-circle"></i> Submit
+    </button>
 
 </form>

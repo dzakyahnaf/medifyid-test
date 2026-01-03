@@ -12,6 +12,8 @@
         <input type="text" class="form-control" name="nama" required  value="{{$item->nama ?? ''}}">
     </div>
 
-    <button class="btn btn-primary mt-3">Submit</button>
+    <button class="btn btn-primary mt-3">
+        <i class="bi bi-check-circle"></i> Submit
+    </button>
 
 </form>
