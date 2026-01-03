@@ -54,6 +54,10 @@ class MasterItemsController extends Controller
 
     public function formSubmit(Request $request, $method, $id = 0)
     {
+        $request->validate([
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+        ]);
+
         if ($method == 'new') {
             $data_item = new MasterItem;
             $kode = MasterItem::count('id');
@@ -63,6 +67,19 @@ class MasterItemsController extends Controller
         } else {
             $data_item = MasterItem::find($id);
             $kode = $data_item->kode;
+        }
+
+        // Handle foto upload
+        if ($request->hasFile('foto')) {
+            // Delete old foto if exists
+            if ($data_item->foto && file_exists(public_path('uploads/master_items/' . $data_item->foto))) {
+                unlink(public_path('uploads/master_items/' . $data_item->foto));
+            }
+
+            $file = $request->file('foto');
+            $fileName = time() . '_' . $kode . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('uploads/master_items'), $fileName);
+            $data_item->foto = $fileName;
         }
 
         $data_item->nama = $request->nama;
@@ -78,7 +95,14 @@ class MasterItemsController extends Controller
 
     public function delete($id)
     {
-        MasterItem::find($id)->delete();
+        $item = MasterItem::find($id);
+        
+        // Delete foto if exists
+        if ($item->foto && file_exists(public_path('uploads/master_items/' . $item->foto))) {
+            unlink(public_path('uploads/master_items/' . $item->foto));
+        }
+        
+        $item->delete();
         return redirect('master-items');
     }
 
