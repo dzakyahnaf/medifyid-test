@@ -48,7 +48,7 @@ class MasterItemsController extends Controller
         if ($method == 'new') {
             $item = [];
         } else {
-            $item = MasterItem::find($id);
+            $item = MasterItem::with('kategoriItems')->find($id);
         }
         $data['item'] = $item;
         $data['method'] = $method;
@@ -58,7 +58,7 @@ class MasterItemsController extends Controller
 
     public function singleView($kode)
     {
-        $data['data'] = MasterItem::where('kode', $kode)->first();
+        $data['data'] = MasterItem::with('kategoriItems')->where('kode', $kode)->first();
         return view('master_items.single.index', $data);
     }
 

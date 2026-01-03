@@ -44,6 +44,19 @@
                             <td>:</td>
                             <td>{{$data->jenis}}</td>
                         </tr>
+                        <tr>
+                            <th>Kategori</th>
+                            <td>:</td>
+                            <td>
+                                @if($data->kategoriItems->count() > 0)
+                                    @foreach($data->kategoriItems as $kategori)
+                                        <span class="badge bg-primary">{{$kategori->nama}}</span>
+                                    @endforeach
+                                @else
+                                    <span class="text-muted">-</span>
+                                @endif
+                            </td>
+                        </tr>
                         @if($data->foto)
                         <tr>
                             <th>Foto</th>
