@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\KategoriItem;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class KategoriItemsController extends Controller
 {
@@ -76,5 +77,21 @@ class KategoriItemsController extends Controller
     {
         KategoriItem::find($id)->delete();
         return redirect('kategori-items');
+    }
+
+    public function downloadPdf($kode)
+    {
+        $kategori = KategoriItem::where('kode', $kode)->with('masterItems')->first();
+
+        if (!$kategori) {
+            abort(404);
+        }
+
+        $data['kategori'] = $kategori;
+        $data['tanggal_cetak'] = now()->format('d/m/Y H:i:s');
+
+        $pdf = Pdf::loadView('kategori_items.pdf.detail', $data);
+
+        return $pdf->download('kategori_' . $kode . '_' . now()->format('YmdHis') . '.pdf');
     }
 }

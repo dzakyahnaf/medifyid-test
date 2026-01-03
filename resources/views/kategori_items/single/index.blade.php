@@ -25,6 +25,9 @@
                     </table>
                     <a class="btn btn-info" href="{{url('kategori-items/form/edit')}}/{{$data->id}}">Edit</a>
                     <a class="btn btn-danger" href="{{url('kategori-items/delete')}}/{{$data->id}}" onclick="return confirm('Yakin ingin menghapus kategori ini?');">Delete</a>
+                    <a class="btn btn-success" href="{{url('kategori-items/download-pdf')}}/{{$data->kode}}">
+                        <i class="bi bi-file-pdf"></i> Download PDF
+                    </a>
 
                     <hr class="my-4">
 

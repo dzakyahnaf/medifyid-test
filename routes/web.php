@@ -39,3 +39,4 @@ Route::get('/kategori-items/form/{method}/{id?}', [App\Http\Controllers\Kategori
 Route::post('/kategori-items/form/{method}/{id?}', [App\Http\Controllers\KategoriItemsController::class, 'formSubmit']);
 Route::get('/kategori-items/view/{kode}', [App\Http\Controllers\KategoriItemsController::class, 'singleView']);
 Route::get('/kategori-items/delete/{id}', [App\Http\Controllers\KategoriItemsController::class, 'delete']);
+Route::get('/kategori-items/download-pdf/{kode}', [App\Http\Controllers\KategoriItemsController::class, 'downloadPdf']);
